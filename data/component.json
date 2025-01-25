@@ -1,0 +1,129 @@
+{
+  "personal_information": {
+    "first_name": {
+      "required": true,
+      "type": "string",
+      "label": "First Name"
+    },
+    "last_name": {
+      "required": true,
+      "type": "string",
+      "label": "Last Name"
+    },
+    "middle_name": {
+      "required": false,
+      "type": "string",
+      "label": "Middle Name"
+    },
+    "date_of_birth": {
+      "required": true,
+      "type": "date",
+      "label": "Date of Birth"
+    },
+    "gender": {
+      "required": true,
+      "type": "enum",
+      "label": "Gender",
+      "options": ["Male", "Female", "Other", "Prefer Not to Say"]
+    },
+    "contact_number": {
+      "required": true,
+      "type": "string",
+      "label": "Contact Number"
+    },
+    "email": {
+      "required": true,
+      "type": "email",
+      "label": "Email Address"
+    },
+    "address": {
+      "required": true,
+      "type": "string",
+      "label": "Address"
+    }
+  },
+  "education": {
+    "highest_education": {
+      "required": true,
+      "type": "enum",
+      "label": "Highest Education",
+      "options": [
+        "High School",
+        "Vocational/Technical",
+        "Associate's Degree",
+        "Bachelor's Degree",
+        "Master's Degree",
+        "Doctorate Degree"
+      ]
+    },
+    "field_of_study": {
+      "required": true,
+      "type": "string",
+      "label": "Field of Study"
+    },
+    "graduation_date": {
+      "required": true,
+      "type": "date",
+      "label": "Graduation Date"
+    },
+    "school_name": {
+      "required": true,
+      "type": "string",
+      "label": "School Name"
+    }
+  },
+  "experience": {
+    "work_experience": {
+      "required": false,
+      "type": "array",
+      "label": "Work Experience",
+      "items": {
+        "type": "object",
+        "properties": {
+          "company_name": {
+            "required": true,
+            "type": "string",
+            "label": "Company Name"
+          },
+          "job_title": {
+            "required": true,
+            "type": "string",
+            "label": "Job Title"
+          },
+          "start_date": {
+            "required": true,
+            "type": "date",
+            "label": "Start Date"
+          },
+          "end_date": {
+            "required": false,
+            "type": "date",
+            "label": "End Date"
+          },
+          "job_description": {
+            "required": true,
+            "type": "string",
+            "label": "Job Description"
+          }
+        }
+      }
+    }
+  },
+  "skills": {
+    "skills": {
+      "required": true,
+      "type": "array",
+      "label": "Skills",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "resume": {
+    "resume_file": {
+      "required": false,
+      "type": "file",
+      "label": "Upload Resume"
+    }
+  }
+}
