@@ -28,18 +28,18 @@ jobs:
       - name: Connect to EC2
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST }} # Public IP or DNS of your EC2 instance
-          username: ${{ secrets.USERNAME }} # Username on your EC2 instance (e.g., 'ec2-user')
-          key: ${{ secrets.SSHKEY }} # Private key for SSH access (stored as a GitHub secret)
+          host: ${{ secrets.SSH_HOST }} # Public IP or DNS of your EC2 instance
+          username: ${{ secrets.SSH_USERNAME }} # Username on your EC2 instance (e.g., 'ec2-user')
+          key: ${{ secrets.SSH_KEY }} # Private key for SSH access (stored as a GitHub secret)
           source: ./ # Source directory for files to be transferred
           target: /home/ubuntu/deployments # Target directory on the EC2 instance
 
       - name: Restart application on EC2
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSHKEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/ubuntu/deployments 
             pm2 restart all # Restart all PM2 processes
