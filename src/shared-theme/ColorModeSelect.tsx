@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+"use client";
 import * as React from "react";
 import { useColorScheme } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";

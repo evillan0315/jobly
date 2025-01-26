@@ -1,3 +1,6 @@
+"use client";
+import React from "react";
+
 import {
   FaUserCircle,
   FaLaptopCode,
@@ -5,17 +8,15 @@ import {
   FaQuoteRight,
 } from "react-icons/fa";
 
-// Define the interface for navigation items,
-// using a generic type to allow for different icon libraries
-interface NavigationItem<T> {
+// Define the interface for navigation items
+interface NavigationItem {
   name: string;
   link: string;
-  icon: React.ReactNode;
+  icon: React.ReactNode; // This accommodates any React node, including icons
 }
 
-// Create an array of navigation items,
-// specifying the icon library type as `typeof FaUserCircle`
-const navigationItems: NavigationItem<typeof FaUserCircle>[] = [
+// Create an array of navigation items
+const navigationItems: NavigationItem[] = [
   {
     name: "About Me",
     link: "/about",
@@ -36,7 +37,8 @@ const navigationItems: NavigationItem<typeof FaUserCircle>[] = [
     link: "/testimonials",
     icon: <FaQuoteRight />,
   },
-  /*   {
+  /* Uncomment if needed
+  {
     name: "Blogs",
     link: "/blogs",
     icon: <FaBlog />,
@@ -44,8 +46,11 @@ const navigationItems: NavigationItem<typeof FaUserCircle>[] = [
   {
     name: "Resume",
     link: "/resume",
-    icon: <FaFileAlt />, 
-  },*/
+    icon: <FaFileAlt />,
+  },
+  */
 ];
+
 export default navigationItems;
-// ... rest of the Navigation component using navigationItems ...
+
+// Example: You can map over `navigationItems` in a navigation component

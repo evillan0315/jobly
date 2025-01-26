@@ -1,7 +1,6 @@
 import { DynamicFormResponse } from "@/types/form";
 
 export function validateDynamicForm(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: Record<string, any>,
   schema: DynamicFormResponse
 ): boolean {
@@ -16,7 +15,6 @@ export function validateDynamicForm(
 }
 
 const validateForm = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formData: Record<string, any>
 ): Record<string, string> => {
   const errors: Record<string, string> = {};

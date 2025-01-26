@@ -4,7 +4,7 @@ import useDynamicForm from "@/hooks/useDynamicForm";
 interface DynamicFormProps {
   fields?: string;
 }
-const DynamicForm: React.FC<DynamicFormProps> = ({ fields }) => {
+const DynamicForm: React.FC<DynamicFormProps> = () => {
   // Example form configuration or model name
   const form = useDynamicForm("exampleModel");
 

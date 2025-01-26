@@ -1,3 +1,4 @@
+"use client";
 import { alpha, Theme } from "@mui/material/styles";
 //import type { PickersProComponents } from "@mui/x-date-pickers-pro/themeAugmentation";
 import type { PickerComponents } from "@mui/x-date-pickers/themeAugmentation";
@@ -9,7 +10,6 @@ import {
 import { menuItemClasses } from "@mui/material/MenuItem";
 import { gray, brand } from "../../../shared-theme/themePrimitives";
 
-/* eslint-disable import/prefer-default-export */
 export const datePickersCustomizations: PickerComponents<Theme> &
   PickerComponents<Theme> = {
   MuiPickersPopper: {

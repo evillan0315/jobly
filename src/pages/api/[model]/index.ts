@@ -8,14 +8,14 @@ export default async function dynamicApiRoute(
   res: NextApiResponse
 ) {
   const session = await getSession({ req }); // Get session for the request
-
-  if (!session) {
+  console.log(session);
+  /*   if (!session) {
     return res.status(401).json({ error: "Unauthorized" }); // If no session, respond with Unauthorized
-  }
+  } */
   const { model } = req.query; // Extract the model name from the URL
   const operation = req.method; // Map HTTP methods to operations
   const data = req.method === "GET" ? req.query : req.body; // Use query for GET and body for other methods
-
+  console.log(data);
   if (
     typeof model !== "string" ||
     !Object.keys(prisma).includes(String(model))

@@ -1,7 +1,7 @@
 "use client";
-
+import React from "react";
 import { IconType } from "react-icons";
-import { FaBan } from "react-icons/fa6";
+
 import AppIcons from "./ui/AppIcons";
 import Chip from "@mui/material/Chip";
 

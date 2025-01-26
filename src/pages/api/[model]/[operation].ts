@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 type PrismaModelKeys = {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   [K in keyof PrismaClient]: PrismaClient[K] extends { findMany: Function }
     ? K
     : never;
@@ -51,20 +50,19 @@ export default async function handler(
   }
 
   try {
-    // Explicitly type `prismaModel`
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const prismaModel = prisma[model] as any; // Use `any` to resolve method dynamically
 
     switch (operation) {
       case "findMany":
         return res.status(201).json(await prismaModel.findMany());
-      case "findUnique":
+      case "findUnique": {
         console.log(req.query.id, "req");
         const d = await prismaModel.findUnique({
-          where: { id: req.query.id }, // Provide `where` conditions in the request body
+          where: { id: req.query.id },
         });
         return res.status(201).json(d);
-      case "create":
+      }
+      case "create": {
         const data = req.body;
 
         return res.status(201).json(
@@ -72,6 +70,7 @@ export default async function handler(
             data, // Provide `data` in the request body
           })
         );
+      }
       case "update":
         return res.json(
           await prismaModel.update({

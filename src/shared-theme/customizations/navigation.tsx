@@ -6,7 +6,6 @@ import { selectClasses } from "@mui/material/Select";
 import { tabClasses } from "@mui/material/Tab";
 import { gray, brand } from "../themePrimitives";
 
-/* eslint-disable import/prefer-default-export */
 export const navigationCustomizations: Components<Theme> = {
   MuiMenuItem: {
     styleOverrides: {

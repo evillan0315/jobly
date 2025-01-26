@@ -100,6 +100,7 @@ export async function handler(
         return await prismaModel.create({ data });
 
       case "update":
+        console.log(data, "data");
         if (!data?.id)
           throw new Error("Update operation requires 'id' in data.");
         return await prismaModel.update({

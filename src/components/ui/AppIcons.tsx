@@ -2,13 +2,9 @@
 import { IconType } from "react-icons";
 import {
   DiAws,
-  DiDocker,
-  DiGithub,
-  DiGithubFull,
   DiJavascript,
   DiMongodb,
   DiMysql,
-  DiNodejs,
   DiPostgresql,
   DiPython,
   DiReact,
@@ -348,7 +344,6 @@ import {
   SiJsonwebtokens,
   SiKubernetes,
   SiMui,
-  SiPrisma,
   SiSocketdotio,
   SiTailwindcss,
   SiTypescript,

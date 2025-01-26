@@ -9,7 +9,7 @@ type Props = {
   hasComponent?: boolean;
 };
 
-function HeroHeader({ title, subtitle, sx, hasComponent }: Props) {
+function HeroHeader({ title, subtitle, hasComponent }: Props) {
   return (
     <div>
       <Typography

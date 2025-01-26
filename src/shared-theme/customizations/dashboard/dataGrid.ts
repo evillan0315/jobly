@@ -1,3 +1,4 @@
+"use client";
 import { paperClasses } from "@mui/material/Paper";
 import { alpha, Theme } from "@mui/material/styles";
 
@@ -11,7 +12,6 @@ import { gridClasses } from "@mui/x-data-grid";
 import { tablePaginationClasses } from "@mui/material/TablePagination";
 import { gray } from "../../../shared-theme/themePrimitives";
 
-/* eslint-disable import/prefer-default-export */
 export const dataGridCustomizations: DataGridComponents<Theme> &
   DataGridComponents<Theme> = {
   MuiDataGrid: {

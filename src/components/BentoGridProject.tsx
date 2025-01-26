@@ -17,8 +17,7 @@ interface BentoGridProjectProps {
   project?: Project;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project }) => {
+const BentoGridProject: React.FC<BentoGridProjectProps> = () => {
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
       {items.map((item, i) => (

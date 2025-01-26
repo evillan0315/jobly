@@ -1,11 +1,11 @@
 "use client";
-import React, { MouseEvent } from "react";
+import React from "react";
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
 
 import IconComponent from "./IconComponent";
 interface ButtonHoverBorderGradientProps {
   label?: string;
-  onClick?: (event: MouseEvent) => void;
+
   backgroundColor?: string;
   color?: string;
   className?: string;
@@ -14,7 +14,6 @@ interface ButtonHoverBorderGradientProps {
 
 const ButtonHoverBorderGradient: React.FC<ButtonHoverBorderGradientProps> = ({
   label,
-  onClick,
 
   className,
   icon,
@@ -25,7 +24,6 @@ const ButtonHoverBorderGradient: React.FC<ButtonHoverBorderGradientProps> = ({
         containerClassName="rounded-full"
         as="button"
         color="primary"
-        onClick={() => onClick}
         className={className}
       >
         {icon ? <IconComponent iconName={icon} size={30} /> : <div></div>}
