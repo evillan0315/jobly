@@ -13,8 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: yarn add
+      - name: Install yarn
+        run: npm install -g yarn
+
+      - name: install Dep
+        run: yarn
 
       - name: Build application
         run: yarn build
