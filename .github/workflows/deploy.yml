@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MY_ENV_VAR: ${{ secrets.DATABASE_URL }} # Example of using a secret as an environment variable
+      DATABASE_URL: ${{ secrets.DATABASE_URL }} # Example of using a secret as an environment variable
 
     steps:
       - name: Checkout code
@@ -37,9 +37,9 @@ jobs:
       - name: Restart application on EC2
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSHKEY }}
           script: |
             cd /home/ubuntu/deployments 
             pm2 restart all # Restart all PM2 processes
