@@ -145,7 +145,7 @@ export const InfiniteMovingCards = ({
       >
         {skills.map((group, idx) => (
           <li
-            className="max-w-full relative light:text-black dark:text-white  text-center justify-center px-4 py-6 md:w-[350px]"
+            className="w-[200px] max-w-full relative light:text-black dark:text-white  text-center justify-center px-4 py-6 md:w-[350px]"
             style={{
               background:
                 "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
@@ -153,7 +153,10 @@ export const InfiniteMovingCards = ({
             key={idx}
           >
             <Box>
-              <Typography variant="h2" sx={{}}>
+              <Typography
+                variant="h4"
+                sx={{ fontSize: "1.5rem", fontWeight: 300 }}
+              >
                 {group?.title}
               </Typography>
               <Stack
@@ -164,7 +167,7 @@ export const InfiniteMovingCards = ({
               >
                 {group.items.map((item: any, idx: number) => (
                   <div key={idx}>
-                    <Typography variant="h3" sx={{ fontSize: "5rem" }}>
+                    <Typography variant="h3" sx={{ fontSize: "2rem", mt: 3 }}>
                       {iconMap[item.icon]}
                     </Typography>
                   </div>

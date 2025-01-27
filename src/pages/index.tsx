@@ -14,8 +14,6 @@ const HomePage = () => {
   return (
     <Container className="relative z-10 h-screen w-full">
       <HeroSectionBackground />
-
-      <BentoGridProject />
       <Box sx={{ py: 6 }}>
         <InfiniteMovingCards
           skills={SkillsComponentData.props}
@@ -23,10 +21,11 @@ const HomePage = () => {
           speed="slow"
         />
       </Box>
+      <BentoGridProject />
     </Container>
   );
 };
-
+HomePage.requireAuth = false;
 export default HomePage;
 /* export async function getServerSideProps() {
   const data = await prisma.page.findFirst({

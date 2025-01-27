@@ -6,6 +6,7 @@ import FooterComponent from "../FooterComponent";
 import CssBaseline from "@mui/material/CssBaseline";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Spotlight } from "../ui/spotlightv2";
+import Drawer from "../ui/drawer";
 
 const DynamicLayout = ({ children }: { children?: ReactNode }) => {
   const [layoutData, setLayoutData] = useState<any>(null);
@@ -33,6 +34,7 @@ const DynamicLayout = ({ children }: { children?: ReactNode }) => {
   return (
     <AppTheme disableCustomTheme={false}>
       <CssBaseline enableColorScheme />
+      <Drawer />
       <main className="h-screen w-full  bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
         {/*     <BackgroundLinesSection /> */}
         <Spotlight />

@@ -7,35 +7,50 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { TextGenerateEffect } from "./ui/text-generate";
 import { iconMap } from "./InfiniMovingCards";
+import { Caveat, DM_Sans } from "@/theme";
 
 export function HeroSectionBackground() {
   const words = [
     {
       text: "Build",
-      className: "text-red-700 dark:text-orange-500",
+      className: `${Caveat.className} text-maroon-900 dark:text-maroon-500 text-2xl sm:text-4xl md:text-7xl`,
     },
     {
       text: "awesome",
+      className: "font-light",
     },
     {
       text: "applications",
+      className: `${DM_Sans.className} text-orange-700 dark:text-maroon-500`,
     },
     {
       text: "with",
+      className: "font-light",
     },
     {
       text: "Eddie!",
-      className: "text-cyan-700 dark:text-cyan-500",
+      className: `${Caveat.className} text-maroon-900 dark:text-maroon-500 text-2xl sm:text-4xl md:text-7xl`,
     },
   ];
   const wordsGen = `Eddie Villanueva, a seasoned software engineer with over 12 years of experience in full-stack development, cloud engineering, and DevOps, is seeking to establish a professional online portfolio. 
  Dedicated to driving innovation, streamlining workflows, and mentoring teams to exceed business objectives.
-
 `;
   return (
     <>
-      <Box component="section" sx={{ my: 8, py: 8, px: 6 }}>
-        <TypewriterEffect words={words} />
+      <Box
+        component="section"
+        sx={{
+          my: 4,
+          py: 4,
+          px: 3,
+          md: {
+            my: 8,
+            py: 8,
+            px: 6,
+          },
+        }}
+      >
+        <TypewriterEffect className="md:text-4xl" words={words} />
         <Box>
           <TextGenerateEffect words={wordsGen} />
         </Box>
@@ -47,10 +62,16 @@ export function HeroSectionBackground() {
           justifyContent={"center"}
           sx={{ mt: 6, w: "100%" }}
         >
-          <Button className="w-40 h-10 rounded-xl bg-cyan-700 border dark:border-white border-transparent text-white text-lg font-bold">
+          <Button
+            color={"primary"}
+            className={`${DM_Sans.className} text-lg rounded-xl  text-white font-bold shadow shadow-neutral-950`}
+          >
             View Projects
           </Button>
-          <Button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-lg">
+          <Button
+            variant="outlined"
+            className={`${DM_Sans.className} text-lg rounded-xl  text-white font-bold shadow shadow-neutral-950`}
+          >
             Get in Touch
           </Button>
         </Grid>
@@ -62,14 +83,14 @@ export function HeroSectionBackground() {
           justifyContent={"center"}
           sx={{ color: "white", mt: 6 }}
         >
-          <Box className="text-7xl p-4 text-orange-300">
+          <Box className="text-5xl p-4 text-orange-300">
             {iconMap["SiNodedotjs"]}
           </Box>
-          <Box className="text-7xl p-4  text-pink-300">
+          <Box className="text-5xl p-4  text-pink-300">
             {iconMap["SiTypescript"]}
           </Box>
-          <Box className="text-7xl p-4 text-red-300">{iconMap["SiPython"]}</Box>
-          <Box className="text-7xl p-4 text-purple-300">
+          <Box className="text-5xl p-4 text-red-300">{iconMap["SiPython"]}</Box>
+          <Box className="text-5xl p-4 text-purple-300">
             {iconMap["SiReact"]}
           </Box>
         </Stack>
@@ -81,8 +102,8 @@ export function HeroSectionBackground() {
           textAlign={"center"}
           sx={{ color: "white", width: "100%" }}
         >
-          <Typography variant="h5" className="text-center">
-            Proficient in Node.JS, Typescript, Python, and React
+          <Typography variant="body1" className="text-center">
+            Proficient in <b>Node.JS</b>, Typescript, Python, and React
           </Typography>
         </Box>
       </Box>

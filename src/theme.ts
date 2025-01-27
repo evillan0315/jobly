@@ -1,6 +1,6 @@
 "use client";
-import { Roboto, DM_Sans } from "next/font/google";
-
+import { Roboto } from "next/font/google";
+import localFont from "next/font/local";
 import { createTheme } from "@mui/material/styles";
 
 import { red, blueGrey, cyan } from "@mui/material/colors";
@@ -17,14 +17,41 @@ export const roboto = Roboto({
   preload: true, // Preload for optimized performance
   variable: "--font-roboto",
 });
-export const dmSans = DM_Sans({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  preload: true, // Preload for optimized performance
-  display: "swap",
-  variable: "--font-dmsans",
-});
 
+export const DM_Sans = localFont({
+  src: [
+    {
+      path: "../public/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+
+  preload: true, // Preload for optimized performance
+  display: "swap", // Use the font with "swap" display strategy
+  variable: "--font-dmsans", // Optional CSS variable for the font
+});
+export const Caveat = localFont({
+  src: [
+    {
+      path: "../public/fonts/Caveat/Caveat-VariableFont_wght.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Caveat/Caveat-VariableFont_wght.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  preload: true, // Preload for optimized performance
+  display: "swap", // Use the font with "swap" display strategy
+  variable: "--font-caveat", // Optional CSS variable for the font
+});
 const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "class",
@@ -59,7 +86,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: `${roboto.style.fontFamily}, ${dmSans.style.fontFamily}}, sans-serif`,
+    fontFamily: `${roboto.style.fontFamily}, ${DM_Sans.style.fontFamily}}, sans-serif`,
     h1: {
       fontSize: "2.5rem",
       fontWeight: 500,

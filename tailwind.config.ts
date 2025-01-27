@@ -10,6 +10,10 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        caveat: ["var(--font-caveat)", "sans-serif"],
+        dmsans: ["var(--font-dmsans)", "sans-serif"],
+      },
       animation: {
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
