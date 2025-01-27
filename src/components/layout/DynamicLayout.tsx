@@ -1,17 +1,11 @@
-// components/Layout.tsx
-import renderComponent from "@/lib/renderComponent";
-// components/Layout.tsx
+"use client";
+
 import React, { ReactNode, useEffect, useState } from "react";
-
 import AppTheme from "@/shared-theme/AppTheme";
-
-import BackgroundLinesSection from "../BackgroundLinesSection";
-
 import FooterComponent from "../FooterComponent";
 import CssBaseline from "@mui/material/CssBaseline";
-//import { AppProvider } from "@toolpad/core/AppProvider";
-//import createTheme from "@mui/material/styles/createTheme";
 import LinearProgress from "@mui/material/LinearProgress";
+import { Spotlight } from "../ui/spotlightv2";
 
 const DynamicLayout = ({ children }: { children?: ReactNode }) => {
   const [layoutData, setLayoutData] = useState<any>(null);
@@ -37,13 +31,14 @@ const DynamicLayout = ({ children }: { children?: ReactNode }) => {
   }
 
   return (
-    <AppTheme>
+    <AppTheme disableCustomTheme={false}>
       <CssBaseline enableColorScheme />
-      <main className="relative h-screen overflow-hidden">
-        <BackgroundLinesSection />
-        <div className="w-full relative overflow-auto">{children}</div>
+      <main className="h-screen w-full  bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
+        {/*     <BackgroundLinesSection /> */}
+        <Spotlight />
+
+        <div className=" z-20 w-full overflow-auto">{children}</div>
         <FooterComponent />
-        {renderComponent(layoutData.layout.footer)}
       </main>
     </AppTheme>
   );

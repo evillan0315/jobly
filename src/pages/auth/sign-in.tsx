@@ -5,7 +5,11 @@ import type {
   InferGetServerSidePropsType,
 } from "next";
 
-import { SignInPage, type AuthProvider } from "@toolpad/core/SignInPage";
+import {
+  AuthResponse,
+  SignInPage,
+  type AuthProvider,
+} from "@toolpad/core/SignInPage";
 import { getProviders, signIn } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
 import { useRouter } from "next/router";
@@ -14,12 +18,15 @@ import { authOptions } from "../api/auth/[...nextauth]";
 export default function SignIn({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(providers);
   const router = useRouter();
   return (
     <SignInPage
       providers={providers}
-      signIn={async (provider, formData, callbackUrl) => {
+      signIn={async (
+        provider: AuthProvider,
+        formData?: any,
+        callbackUrl?: string
+      ) => {
         try {
           const signInResponse = await signIn(
             provider.id,
@@ -31,32 +38,31 @@ export default function SignIn({
                 }
               : { callbackUrl: callbackUrl ?? "/" }
           );
+
           if (signInResponse && signInResponse.error) {
-            // Handle Auth.js errors
             return {
               error:
                 signInResponse.error === "CredentialsSignin"
                   ? "Invalid credentials"
                   : "An error with Auth.js occurred",
               type: signInResponse.error,
-            };
+            } as AuthResponse; // Ensure this matches AuthResponse
           }
+
           // If the sign in was successful,
           // manually redirect to the callback URL
-          // since the `redirect: false` option was used
-          // to be able to display error messages on the same page without a full page reload
           if (provider.id === "credentials") {
             router.push(callbackUrl ?? "/");
           }
-          return {};
+          return {}; // This should adhere to AuthResponse
         } catch (error) {
-          // An error boundary must exist to handle unknown errors
           return {
-            error: error,
+            error: String(error), // Explicitly cast the error to a string
             type: "UnknownError",
-          };
+          } as AuthResponse;
         }
       }}
+
       //slots={{ forgotPasswordLink: ForgotPasswordLink, signUpLink: SignUpLink }}
     />
   );

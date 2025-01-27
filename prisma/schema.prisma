@@ -372,14 +372,12 @@ model Image {
   filename        String?
   title           String?
   projectImageId  String?
-  componentId     String?
   formId          String?
   navigationId    String?
   pageId          String?
   createdByUserId String
   createdOn       DateTime    @default(now())
   Company         Company[]
-  Component       Component?  @relation(fields: [componentId], references: [id])
   Form            Form?       @relation(fields: [formId], references: [id])
   Navigation      Navigation? @relation(fields: [navigationId], references: [id])
   Page            Page?       @relation(fields: [pageId], references: [id])
@@ -388,30 +386,28 @@ model Image {
 model Component {
   id              String   @id @default(uuid())
   name            String
-  props           Json
-  typeId          String?
-  createdByUserId String
+  props           Json?
+  createdByUserId String?
   createdOn       DateTime @default(now())
-  type            Type?    @relation(fields: [typeId], references: [id])
-  Image           Image[]
-  page            Page[]   @relation("ComponentToPage")
+  type            String?
+  sectionId       String?
+  section         Section? @relation(fields: [sectionId], references: [id])
 }
 
 model Page {
-  id              String      @id @default(uuid())
+  id              String    @id @default(uuid())
   name            String
   content         String
   props           Json
   typeId          String?
-  createdByUserId String
-  createdOn       DateTime    @default(now())
-  default         Boolean     @default(false)
+  createdByUserId String?
+  createdOn       DateTime  @default(now())
+  default         Boolean   @default(false)
   Form            Form[]
   image           Image[]
   layout          Layout[]
-  type            Type?       @relation(fields: [typeId], references: [id])
+  type            Type?     @relation(fields: [typeId], references: [id])
   Section         Section[]
-  Component       Component[] @relation("ComponentToPage")
 }
 
 model Navigation {
@@ -427,19 +423,20 @@ model Navigation {
 }
 
 model Section {
-  id        String   @id @default(uuid())
+  id        String      @id @default(uuid())
   name      String
-  props     Json
-  createdOn DateTime @default(now())
+  props     Json?
+  createdOn DateTime    @default(now())
   pageId    String?
-  page      Page?    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  Component Component[]
+  page      Page?       @relation(fields: [pageId], references: [id], onDelete: Cascade)
 }
 
 model Form {
   id              String        @id @default(uuid())
   name            String
   typeId          String?
-  createdByUserId String
+  createdByUserId String?
   createdOn       DateTime      @default(now())
   description     String?
   status          String?
@@ -455,7 +452,7 @@ model FormSection {
   id              String   @id @default(uuid())
   name            String
   formId          String?
-  createdByUserId String
+  createdByUserId String?
   createdOn       DateTime @default(now())
   fields          Field[]
   form            Form?    @relation(fields: [formId], references: [id], onDelete: Cascade)
@@ -464,15 +461,15 @@ model FormSection {
 model Field {
   id              String       @id @default(uuid())
   name            String
-  createdByUserId String
+  createdByUserId String?
   createdOn       DateTime     @default(now())
   required        Boolean?
   formId          String?
   formSectionId   String?
-  label           String
-  type            String
+  label           String?
+  type            String?
   options         String[]
-  value           String
+  value           String?
   form            Form?        @relation(fields: [formId], references: [id])
   formSection     FormSection? @relation(fields: [formSectionId], references: [id], onDelete: Cascade)
 }
@@ -480,13 +477,12 @@ model Field {
 model Layout {
   id              String   @id @default(uuid())
   name            String
-  layout          Json
   pageId          String?
-  typeId          String?
-  createdByUserId String
+  createdByUserId String?
   createdOn       DateTime @default(now())
+  props           Json?
+  type            String?
   page            Page?    @relation(fields: [pageId], references: [id], onDelete: Cascade)
-  type            Type?    @relation(fields: [typeId], references: [id])
 }
 
 model Type {
@@ -496,10 +492,8 @@ model Type {
   categoryId      String?
   createdByUserId String
   createdOn       DateTime     @default(now())
-  Component       Component[]
   Education       Education[]
   Form            Form[]
-  Layout          Layout[]
   Navigation      Navigation[]
   Page            Page[]
   Technology      Technology[]

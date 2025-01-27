@@ -80,6 +80,7 @@ export type gridLayoutType = {
       row: number;
       content?: string;
       type: string;
+      sw?: {};
     }[];
   }[];
 };

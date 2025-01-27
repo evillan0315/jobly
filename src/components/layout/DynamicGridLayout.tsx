@@ -30,15 +30,16 @@ const gridData = {
     },
     {
       column: 4,
+      sw: { borderRadius: 1, flexGrow: 1 },
       rows: [
         { row: 1, content: "Row 1 Content", type: "cell" },
         { row: 2, content: "Row 2 Content", type: "cell" },
-        { row: 3, content: "Row 3 Content", type: "cell" },
+        {
+          row: 3,
+          content: "Row 3 Content",
+          type: "cell",
+        },
       ],
-    },
-    {
-      column: 5,
-      rows: [{ row: 1, content: "col 5 Row 1 Content", type: "cell" }],
     },
   ],
 };
@@ -62,7 +63,6 @@ const DynamicGridLayout: React.FC<DynamicGridLayoutProps> = ({ data }) => {
         console.error("Failed to fetch layout:", error);
       }
     };
-
     fetchLayout();
   }, []);
   return (
@@ -88,7 +88,7 @@ const DynamicGridLayout: React.FC<DynamicGridLayoutProps> = ({ data }) => {
                     variant="rectangular"
                     width="100%"
                     height={100}
-                    sx={{ borderRadius: 1, flexGrow: 1 }}
+                    sx={row?.sw}
                   />
                 </Box>
               </Grid>

@@ -106,7 +106,16 @@ export interface Skills {
   keywords: string[];
   icon: string;
 }
-
+export interface SkillGroup {
+  component: string;
+  props: {
+    title: string;
+    items: {
+      name: string;
+      icon: string;
+    }[];
+  }[];
+}
 export interface Data {
   basics: Basics;
   work: Work[];

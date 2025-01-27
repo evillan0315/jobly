@@ -15,6 +15,7 @@ import { FaLaptopCode, FaStar, FaQuoteRight } from "react-icons/fa6";
 import DynamicLayout from "@/components/layout/DynamicLayout";
 import SEOHead from "@/components/SEOHead";
 import theme, { roboto } from "../theme";
+import { useColorScheme } from "@mui/material/styles";
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: () => React.ReactNode;
   requireAuth?: boolean;
@@ -23,11 +24,34 @@ export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+export function ModeSwitcher() {
+  const { mode, setMode } = useColorScheme();
 
+  if (!mode) {
+    return null;
+  }
+
+  return (
+    <select
+      value={mode}
+      onChange={(event: any) => {
+        setMode(event.target.value);
+        // For TypeScript, cast `event.target.value as 'light' | 'dark' | 'system'`:
+      }}
+    >
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  );
+}
 function getDefaultLayout(page: React.ReactElement<any>) {
   return (
-    <main className="relative z-10 w-full h-screen">
-      <DynamicLayout>{page}</DynamicLayout>
+    <main>
+      <DynamicLayout>
+        <ModeSwitcher />
+        {page}
+      </DynamicLayout>
     </main>
   );
 }
@@ -108,7 +132,7 @@ export default function App(props: AppPropsWithLayout) {
     Component,
     pageProps: { session, ...pageProps },
   } = props;
-  console.log(session);
+
   const getLayout = Component.getLayout ?? getDefaultLayout;
   const requireAuth = Component.requireAuth ?? true;
 

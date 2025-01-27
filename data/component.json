@@ -1,26 +1,62 @@
 {
-  "header": {
-    "title": "My App",
-    "subtitle": "Edit Layout"
-  },
-  "sections": [
+  title: "Skills",
+  skills: [
     {
-      "id": 1,
-      "type": "hero",
-      "content": {
-        "headline": "Welcome to My App",
-        "description": "This is the best app ever!"
-      }
+      title: "Frontend Development",
+      items: [
+        { name: "Next.js", icon: <SiNextdotjs /> },
+        { name: "React", icon: <SiReact /> },
+        { name: "Javascript", icon: <SiJavascript /> },
+        { name: "Material-UI", icon: <SiMui /> },
+        { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+      ],
     },
     {
-      "id": 2,
-      "type": "features",
-      "content": {
-        "items": [
-          { "id": 1, "title": "Feature 1", "description": "Description 1" },
-          { "id": 2, "title": "Feature 2", "description": "Description 2" }
-        ]
-      }
-    }
-  ]
+      title: "Backend Development",
+      items: [
+        { name: "Python", icon: <SiPython /> },
+        { name: "Node.js", icon: <SiNodedotjs /> },
+        { name: "Typescript", icon: <SiTypescript /> },
+        { name: "PHP", icon: <SiPhp /> },
+        { name: "Prisma", icon: <SiPrisma /> },
+      ],
+    },
+    {
+      title: "Cloud & DevOps",
+      items: [
+        { name: "AWS", icon: <SiAmazonwebservices /> },
+        { name: "Docker", icon: <SiDocker /> },
+        { name: "Kubernetes", icon: <SiKubernetes /> },
+        { name: "CI/CD (GitHub Actions)", icon: <SiGithub /> },
+      ],
+    },
+    {
+      title: "Database Management",
+      items: [
+        { name: "PostgreSQL", icon: <SiPostgresql /> },
+        { name: "MongoDB", icon: <SiMongodb /> },
+        { name: "MySQL", icon: <SiMysql /> },
+        { name: "GraphQL", icon: <SiGraphql /> },
+        { name: "DynamoDB", icon: <SiAmazondynamodb /> },
+      ],
+    },
+    {
+      title: "API Integration",
+      items: [
+        { name: "RESTful APIs", icon: <MdApi /> },
+        { name: "OAuth/JWT", icon: <TbBrandOauth /> },
+        { name: "Paypal", icon: <SiPaypal /> },
+        { name: "Stripe", icon: <SiStripe /> },
+      ],
+    },
+    {
+      title: "AI Integration",
+      items: [
+        { name: "M/L Models", icon: <TbAi /> },
+        { name: "ChatGPT", icon: <SiOpenai /> },
+        { name: "Google Gemini", icon: <SiGooglegemini /> },
+        { name: "Tensorflow", icon: <SiTensorflow /> },
+      ],
+    },
+  ],
 }

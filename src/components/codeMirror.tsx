@@ -9,6 +9,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 interface AceCodeEditorProps {
   initialCode: string;
   mode?: string;
+  // eslint-disable-next-line no-unused-vars
   onSave: (code: string) => void;
 }
 const AceCodeEditor: React.FC<AceCodeEditorProps> = ({

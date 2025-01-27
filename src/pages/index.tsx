@@ -1,53 +1,34 @@
 "use client";
 import * as React from "react";
-
 //import prisma from "@/lib/prisma";
 
-//import BentoGridProject from "@/components/BentoGridProject";
-import prisma from "@/lib/prisma";
-import AnimatedModal from "@/components/AnimatedModal";
-import { ModalProvider, ModalTrigger } from "@/components/ui/animated-modal";
-import HeroSection from "@/components/HeroSection";
-import { Container } from "@mui/material";
 import BentoGridProject from "@/components/BentoGridProject";
-import { AppProvider } from "@toolpad/core/AppProvider";
-import { Page } from "@/types/types";
-import PageSection from "@/components/PageSection";
-import DynamicGridLayout from "@/components/layout/DynamicGridLayout";
+import { InfiniteMovingCards } from "@/components/InfiniMovingCards";
+import { SkillsComponentData } from "@/lib/components";
+import { HeroSectionBackground } from "@/components/HeroSectionBackground";
 
-//import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
-const AniModal = () => {
+const HomePage = () => {
   return (
-    <ModalProvider>
-      <ModalTrigger>Get In Touch</ModalTrigger>
+    <Container className="relative z-10 h-screen w-full">
+      <HeroSectionBackground />
 
-      <AnimatedModal />
-    </ModalProvider>
-  );
-};
-const HomePage = ({ page }: { page: Page }) => {
-  console.log(page.id, "test");
-
-  return (
-    <AppProvider>
-      <Container className="relative z-10 h-screen">
-        <DynamicGridLayout />
-        <PageSection pageId={page.id} />
-
-        <HeroSection
-          title={page?.name}
-          subtitle={page?.content}
-          Component={AniModal}
+      <BentoGridProject />
+      <Box sx={{ py: 6 }}>
+        <InfiniteMovingCards
+          skills={SkillsComponentData.props}
+          direction="left"
+          speed="slow"
         />
-        <BentoGridProject />
-      </Container>
-    </AppProvider>
+      </Box>
+    </Container>
   );
 };
 
 export default HomePage;
-export async function getServerSideProps() {
+/* export async function getServerSideProps() {
   const data = await prisma.page.findFirst({
     where: {
       default: true,
@@ -64,4 +45,4 @@ export async function getServerSideProps() {
       page: serialize,
     },
   };
-}
+} */
