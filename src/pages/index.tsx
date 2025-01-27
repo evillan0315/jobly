@@ -52,9 +52,6 @@ export async function getServerSideProps() {
     where: {
       default: true,
     },
-    include: {
-      //Section: true,
-    },
   });
 
   await prisma.$disconnect();
