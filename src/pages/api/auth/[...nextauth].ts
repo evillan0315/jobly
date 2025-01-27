@@ -22,8 +22,7 @@ export const providersMap = [
       email: { label: "Email", type: "text" },
       password: { label: "Password", type: "password" },
     },
-    async authorize(credentials, req) {
-      console.log(req);
+    async authorize(credentials) {
       if (!credentials?.email || !credentials?.password) {
         throw new Error("Invalid credentials");
       }
@@ -67,6 +66,17 @@ export default NextAuth({
       return baseUrl;
     },
     async session({ session }) {
+      if (session.user?.email) {
+        const userD = await prisma.user.findFirst({
+          where: { email: session.user?.email },
+        });
+        if (userD) {
+          session.user = userD;
+        }
+
+        return session;
+      }
+
       //const nSession = { ...session, user };
       return session; // The return type will match the one returned in `useSession()`
     },

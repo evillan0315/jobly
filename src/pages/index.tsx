@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 //import prisma from "@/lib/prisma";
 
 //import BentoGridProject from "@/components/BentoGridProject";
@@ -11,6 +10,11 @@ import { ModalProvider, ModalTrigger } from "@/components/ui/animated-modal";
 import HeroSection from "@/components/HeroSection";
 import { Container } from "@mui/material";
 import BentoGridProject from "@/components/BentoGridProject";
+import { AppProvider } from "@toolpad/core/AppProvider";
+import { Page } from "@/types/types";
+import PageSection from "@/components/PageSection";
+import DynamicGridLayout from "@/components/layout/DynamicGridLayout";
+
 //import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 const AniModal = () => {
@@ -22,42 +26,45 @@ const AniModal = () => {
     </ModalProvider>
   );
 };
-const HomePage = ({
-  props,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(props);
+const HomePage = ({ page }: { page: Page }) => {
+  console.log(page.id, "test");
+
   return (
-    <Container className="relative z-10 h-screen">
-      <HeroSection
-        title={"Create.Read.Update.Delete."}
-        subtitle={"hello"}
-        Component={AniModal}
-      />
-      <BentoGridProject />
-    </Container>
+    <AppProvider>
+      <Container className="relative z-10 h-screen">
+        <DynamicGridLayout />
+        <PageSection pageId={page.id} />
+
+        <HeroSection
+          title={page?.name}
+          subtitle={page?.content}
+          Component={AniModal}
+        />
+        <BentoGridProject />
+      </Container>
+    </AppProvider>
   );
 };
 
 export default HomePage;
-export const getServerSideProps: GetServerSideProps = async () => {
-  const data = await prisma.component.findUnique({
+export async function getServerSideProps() {
+  const data = await prisma.page.findFirst({
     where: {
-      id: "80dd7458-95e0-4f06-98b3-6d1dd7c8465d",
+      default: true,
+    },
+    include: {
+      //Section: true,
     },
   });
-  console.log();
+
   await prisma.$disconnect();
-
-  // Serialize dates to ISO strings for JSON compatibility
-  /*   const serializedProjects = projects.map((project) => ({
-    ...project,
-    startDate: project.startDate.toISOString(),
-    endDate: project.endDate.toISOString(),
-  })); */
-
+  if (!data) {
+    console.log(data);
+  }
+  const serialize = { ...data, createdOn: data?.createdOn.toISOString() };
   return {
     props: {
-      components: data?.props,
+      page: serialize,
     },
   };
-};
+}

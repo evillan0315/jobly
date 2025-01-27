@@ -405,11 +405,13 @@ model Page {
   typeId          String?
   createdByUserId String
   createdOn       DateTime    @default(now())
+  default         Boolean     @default(false)
+  Form            Form[]
   image           Image[]
   layout          Layout[]
   type            Type?       @relation(fields: [typeId], references: [id])
+  Section         Section[]
   Component       Component[] @relation("ComponentToPage")
-  Section         Section[]   @relation("PageToSection")
 }
 
 model Navigation {
@@ -425,14 +427,12 @@ model Navigation {
 }
 
 model Section {
-  id              String   @id @default(uuid())
-  name            String
-  props           Json
-  typeId          String?
-  createdByUserId String
-  createdOn       DateTime @default(now())
-  type            Type?    @relation(fields: [typeId], references: [id])
-  page            Page[]   @relation("PageToSection")
+  id        String   @id @default(uuid())
+  name      String
+  props     Json
+  createdOn DateTime @default(now())
+  pageId    String?
+  page      Page?    @relation(fields: [pageId], references: [id], onDelete: Cascade)
 }
 
 model Form {
@@ -443,7 +443,9 @@ model Form {
   createdOn       DateTime      @default(now())
   description     String?
   status          String?
+  pageId          String?
   fields          Field[]
+  Page            Page?         @relation(fields: [pageId], references: [id])
   type            Type?         @relation(fields: [typeId], references: [id])
   formSections    FormSection[]
   Image           Image[]
@@ -500,7 +502,6 @@ model Type {
   Layout          Layout[]
   Navigation      Navigation[]
   Page            Page[]
-  Section         Section[]
   Technology      Technology[]
   Category        Category?    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }

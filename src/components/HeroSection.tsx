@@ -43,7 +43,12 @@ const StyledBox = styled("div")(({ theme }) => ({
     borderColor: (theme.cssVariables || theme).palette.grey[700],
   }),
 }));
-const HeroSection: React.FC<HeroSectionProps> = ({ subtitle, Component }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({
+  title,
+  subtitle,
+  Component,
+}) => {
+  const spTitle = title.split(".");
   return (
     <div className="z-10 relative">
       <Container
@@ -61,55 +66,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ subtitle, Component }) => {
           useFlexGap
           sx={{ alignItems: "center", width: { xs: "100%", sm: "80%" }, my: 2 }}
         >
-          <Typography
-            variant="h1"
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              alignItems: "center",
-              fontSize: "clamp(3rem, 10vw, 3.5rem)",
-            }}
-          >
-            Create.
-            <Typography
-              component="span"
-              variant="h1"
-              sx={(theme) => ({
-                fontSize: "inherit",
-                color: "primary.main",
-                ...theme.applyStyles("dark", {
-                  color: "primary.light",
-                }),
-              })}
-            >
-              Read.
-            </Typography>
-            Update.
-            <Typography
-              component="span"
-              variant="h1"
-              sx={(theme) => ({
-                fontSize: "inherit",
-                color: "secondary.main",
-                ...theme.applyStyles("dark", {
-                  color: "secondary.light",
-                }),
-              })}
-            >
-              Delete.
-            </Typography>
-          </Typography>
-          <Typography
-            sx={{
-              textAlign: "center",
-              color: "text.info",
-              width: { sm: "100%", md: "80%" },
-            }}
-          >
-            {subtitle}
-          </Typography>
+          {spTitle.map((t, i) => (
+            <div key={i}>
+              <Typography variant="h1">{t}</Typography>
+            </div>
+          ))}
         </Stack>
-
+        <Typography variant="body1">{subtitle}</Typography>
         {Component ? <Component /> : <StyledBox />}
       </Container>
     </div>

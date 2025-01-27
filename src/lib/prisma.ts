@@ -60,7 +60,13 @@ function isValidModel(model: string): model is PrismaModelKeys {
  */
 export async function handler(
   model: PrismaModelKeys,
-  operation: "findMany" | "findUnique" | "create" | "update" | "delete",
+  operation:
+    | "findMany"
+    | "findFilterMany"
+    | "findUnique"
+    | "create"
+    | "update"
+    | "delete",
   data: any
 ) {
   // Ensure model is a valid string
@@ -88,7 +94,11 @@ export async function handler(
     switch (operation) {
       case "findMany":
         return await prismaModel.findMany();
-
+      case "findFilterMany":
+        console.log(data);
+        return await prismaModel.findMany({
+          where: { pageId: data.pageId },
+        });
       case "findUnique":
         if (!data?.id)
           throw new Error("findUnique operation requires 'id' in data.");
@@ -97,6 +107,7 @@ export async function handler(
         });
 
       case "create":
+        console.log(data, "prisma create");
         return await prismaModel.create({ data });
 
       case "update":

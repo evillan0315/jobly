@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import axios from "axios";
+import ColorModeSelect from "@/shared-theme/ColorModeSelect";
 
 const EditLayoutScreen = () => {
   const [idata, setData] = useState<any>(null);
@@ -77,7 +78,8 @@ const EditLayoutScreen = () => {
 
   return (
     <Container className="relative z-10 h-screen">
-      <Box sx={{ padding: 4 }}>
+      <ColorModeSelect />
+      <Box sx={{ padding: 4 }} component={"form"}>
         <Typography variant="h4" gutterBottom>
           Edit Layout
         </Typography>
@@ -86,6 +88,17 @@ const EditLayoutScreen = () => {
         <Card sx={{ marginBottom: 2 }}>
           <CardContent>
             <Typography variant="h6">Header</Typography>
+            <TextField
+              id="header-title"
+              label="Title"
+              value={layout.header.title}
+              onChange={(e) =>
+                setLayout({
+                  ...layout,
+                  header: { ...layout.header, title: e.target.value },
+                })
+              }
+            />
             <TextField
               fullWidth
               label="Title"
@@ -142,6 +155,12 @@ const EditLayoutScreen = () => {
                           fullWidth
                           label="Description"
                           value={section.content.description}
+                          multiline
+                          sx={{
+                            height: "100%",
+                          }}
+                          variant="outlined"
+                          rows={4}
                           onChange={(e) =>
                             handleFieldChange(
                               section.id,
@@ -179,6 +198,9 @@ const EditLayoutScreen = () => {
                             fullWidth
                             label={`Feature ${index + 1} Description`}
                             value={item.description}
+                            multiline
+                            rows={4}
+                            defaultValue="Default Value"
                             onChange={(e) => {
                               const updatedItems = section.content.items.map(
                                 (i: any) =>
@@ -215,5 +237,6 @@ const EditLayoutScreen = () => {
     </Container>
   );
 };
-
+EditLayoutScreen.getDefaultLayout = (page: React.ReactNode) => page;
+EditLayoutScreen.requireAuth = true;
 export default EditLayoutScreen;

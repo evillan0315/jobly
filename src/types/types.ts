@@ -42,7 +42,6 @@ export type Section = {
   id: string;
   name: string;
   props: Prisma.JsonValue;
-  typeId: string | null;
 };
 
 export type Form = {
@@ -73,7 +72,17 @@ export type Layout = {
   pageId: string | null;
   typeId: string | null;
 };
-
+export type gridLayoutType = {
+  type: string;
+  columns: {
+    column: number;
+    rows: {
+      row: number;
+      content?: string;
+      type: string;
+    }[];
+  }[];
+};
 export type Type = {
   id: string;
   name: string;

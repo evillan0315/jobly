@@ -1,54 +1,26 @@
 {
-  "layout": {
-    "type": "page",
-    "footer": {
-      "type": "box",
-      "children": [{ "text": "© 2025 My App", "type": "typography" }],
-      "className": "bg-gray-800 p-4 text-white text-center"
-    },
-    "header": {
-      "type": "appbar",
-      "title": "My App",
-      "buttons": [{ "text": "Login", "action": "login" }]
-    },
-    "sections": [
-      {
-        "id": 1,
-        "type": "hero",
-        "content": {
-          "headline": "Welcome to My App",
-          "description": "This is the best app ever!"
-        }
-      },
-      {
-        "id": 2,
-        "type": "features",
-        "content": {
-          "items": [
-            { "id": 1, "title": "Feature 1", "description": "Description 1" },
-            { "id": 2, "title": "Feature 2", "description": "Description 2" }
-          ]
-        }
+  "header": {
+    "title": "My App",
+    "subtitle": "Edit Layout"
+  },
+  "sections": [
+    {
+      "id": 1,
+      "type": "hero",
+      "content": {
+        "headline": "Welcome to My App",
+        "description": "This is the best app ever!"
       }
-    ],
-    "content": {
-      "type": "box",
-      "children": [
-        {
-          "text": "Welcome to the Dashboard",
-          "type": "typography",
-          "variant": "h4"
-        },
-        {
-          "name": "CustomComponent",
-          "type": "component",
-          "props": {
-            "title": "Custom Component Title",
-            "description": "This is a description for the custom component."
-          }
-        }
-      ],
-      "className": "p-6"
+    },
+    {
+      "id": 2,
+      "type": "features",
+      "content": {
+        "items": [
+          { "id": 1, "title": "Feature 1", "description": "Description 1" },
+          { "id": 2, "title": "Feature 2", "description": "Description 2" }
+        ]
+      }
     }
-  }
+  ]
 }
