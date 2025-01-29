@@ -1,79 +1,74 @@
-import React, { useState } from "react";
-import { Button } from "@mui/material";
-import { motion, AnimatePresence } from "framer-motion";
-import IconComponent from "../IconComponent";
-const Drawer = () => {
-  const [isOpen, setIsOpen] = useState(false);
+import React from "react";
+import DrawerMui from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid2";
+import CloseIcon from '@mui/icons-material/Close';
+import List from "@mui/material/List"; 
+import IconButton from '@mui/material/IconButton';
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen);
-  };
+
+interface DrawerProps {
+  open: boolean;
+  content: React.ReactNode;
+  onClose: () => void;
+}
+const Drawer: React.FC<DrawerProps> = ({ open, content, onClose }) => {
+  //const [drawerWidth, setDrawerWidth] = useState("50%");
+
+  const DrawerList = (
+    <>
+      {content ? (
+        content
+      ) : (
+        <List>
+          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </>
+  );
 
   return (
     <div>
-      {/* Button to toggle the drawer */}
-      <Button variant="outlined" color="primary" onClick={toggleDrawer}>
-        {isOpen
-          ? `${(<IconComponent iconName="close" size={20} />)}`
-          : `${(<IconComponent iconName="open" size={20} />)}`}
-      </Button>
+      <DrawerMui
+      	anchor="bottom"
+        PaperProps={{
+          sx: {
+            width: "100vw", // Full width
+            height: "100vh", // Full height
+            margin: 0, // No margins
+            background: "rgba(0,0,0,0.4)"
+          },
+        }}
+        open={open}
+        onClose={onClose}
+        className="bg-black bg-opacity-70 w-full"
+      >
+        <Grid>
+          <IconButton aria-label="close" size="large" onClick={onClose}>
+	    <CloseIcon />
+	</IconButton>
+        </Grid>
+        <Box component="div" className={`w-full md:w-["1024px"] px-4 py-0 h-screen mx-auto`}>
 
-      {/* Drawer with Framer Motion */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ x: "-100%" }} // Start off-screen
-            animate={{ x: 0 }} // Animate to visible
-            exit={{ x: "-100%" }} // Animate back off-screen
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "450px",
-              height: "100vh",
-              background: "#ffffff",
-              boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)",
-              zIndex: 1000,
-              padding: "1rem",
-            }}
-          >
-            {/* Drawer Content */}
-            <h3>Drawer Menu</h3>
-            <ul>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {DrawerList}
 
-      {/* Overlay to close the drawer when clicking outside */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "rgba(0, 0, 0, 0.5)",
-            zIndex: 999,
-          }}
-          onClick={toggleDrawer}
-        ></motion.div>
-      )}
+        </Box>
+      </DrawerMui>
     </div>
   );
 };

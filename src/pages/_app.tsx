@@ -1,10 +1,8 @@
 import "@/styles/global.css";
 import * as React from "react";
 import { AppProvider } from "@toolpad/core/nextjs";
-//import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useRouter } from "next/router";
 import { AppCacheProvider } from "@mui/material-nextjs/v15-pagesRouter";
-//import DashboardIcon from "@mui/icons-material/Dashboard";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import type { Navigation } from "@toolpad/core/AppProvider";
@@ -14,7 +12,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaLaptopCode, FaStar, FaQuoteRight } from "react-icons/fa6";
 import DynamicLayout from "@/components/layout/DynamicLayout";
 import SEOHead from "@/components/SEOHead";
-import theme, { roboto } from "../theme";
+import theme from "../theme";
 import { useColorScheme } from "@mui/material/styles";
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: () => React.ReactNode;
@@ -47,12 +45,9 @@ export function ModeSwitcher() {
 }
 function getDefaultLayout(page: React.ReactElement<any>) {
   return (
-    <main>
-      <DynamicLayout>
-        <ModeSwitcher />
-        {page}
-      </DynamicLayout>
-    </main>
+    <>
+      <DynamicLayout>{page}</DynamicLayout>
+    </>
   );
 }
 
@@ -121,7 +116,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         session={session}
         authentication={AUTHENTICATION}
       >
-        <main className={roboto.variable}>{children}</main>
+        {children}
       </AppProvider>
     </React.Fragment>
   );

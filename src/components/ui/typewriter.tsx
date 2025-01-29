@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { useEffect } from "react";
+import Box from "@mui/material/Box";
 
 export const TypewriterEffect = ({
   words,
@@ -21,6 +22,98 @@ export const TypewriterEffect = ({
     return {
       ...word,
       text: word.text.split(""),
+      className: word.className,
+    };
+  });
+
+  const [scope, animate] = useAnimate();
+  const isInView = useInView(scope);
+  useEffect(() => {
+    if (isInView) {
+      animate(
+        "span",
+        {
+          display: "inline-block",
+          opacity: 1,
+          width: "fit-content",
+        },
+        {
+          duration: 0.04,
+          delay: stagger(0.04),
+          ease: "easeInOut",
+        }
+      );
+    }
+  }, [isInView, animate]);
+
+  const renderWords = () => {
+    return (
+      <motion.div ref={scope} className="inline">
+        {wordsArray.map((word, idx) => {
+          return (
+            <Box component="div" key={`word-${idx}`} className="inline-block">
+              {word.text.map((char, index) => (
+                <motion.span
+                  initial={{}}
+                  key={`char-${index}`}
+                  className={cn(`opacity-0 hidden`, word.className)}
+                >
+                  {char}
+                </motion.span>
+              ))}
+              &nbsp;
+            </Box>
+          );
+        })}
+      </motion.div>
+    );
+  };
+  return (
+    <div
+      className={cn(
+        "text-center",
+        className
+      )}
+    >
+      {renderWords()}
+      <motion.span
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.09,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+        className={cn(
+          "inline-block rounded-sm w-[4px] h-2 md:h-3 lg:h-4 bg-cyan-500",
+          cursorClassName
+        )}
+      ></motion.span>
+    </div>
+  );
+};
+export const TypewriterEffectHeader = ({
+  words,
+  className,
+  cursorClassName,
+}: {
+  words: {
+    text: string;
+    className?: string;
+  }[];
+  className?: string;
+  cursorClassName?: string;
+}) => {
+  // split text inside of words into array of characters
+  const wordsArray = words.map((word) => {
+    return {
+      ...word,
+      text: word.text.split(""),
+      className: word.className,
     };
   });
 
@@ -49,18 +142,18 @@ export const TypewriterEffect = ({
       <motion.div ref={scope} className="inline">
         {wordsArray.map((word, idx) => {
           return (
-            <div key={`word-${idx}`} className="inline-block">
+            <Box component="div" key={`word-${idx}`} className="inline-block">
               {word.text.map((char, index) => (
                 <motion.span
                   initial={{}}
                   key={`char-${index}`}
-                  className={cn(`text-white opacity-0 hidden`, word.className)}
+                  className={cn(`opacity-0 hidden`, word.className)}
                 >
                   {char}
                 </motion.span>
               ))}
               &nbsp;
-            </div>
+            </Box>
           );
         })}
       </motion.div>
@@ -69,7 +162,7 @@ export const TypewriterEffect = ({
   return (
     <div
       className={cn(
-        "text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-center",
+        "font-light text-center",
         className
       )}
     >
@@ -87,14 +180,13 @@ export const TypewriterEffect = ({
           repeatType: "reverse",
         }}
         className={cn(
-          "inline-block rounded-sm w-[4px] h-4 md:h-6 lg:h-10 bg-blue-500",
+          "inline-block rounded-sm w-[4px] h-2 md:h-3 lg:h-4 bg-cyan-500",
           cursorClassName
         )}
       ></motion.span>
     </div>
   );
 };
-
 export const TypewriterEffectSmooth = ({
   words,
   className,
@@ -153,7 +245,7 @@ export const TypewriterEffectSmooth = ({
         }}
       >
         <div
-          className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold"
+          className="text-xs sm:text-base md:text-2xl lg:text-3xl xl:text-4xl font-bold"
           style={{
             whiteSpace: "nowrap",
           }}

@@ -155,7 +155,7 @@ export const InfiniteMovingCards = ({
             <Box>
               <Typography
                 variant="h4"
-                sx={{ fontSize: "1.5rem", fontWeight: 300 }}
+                sx={{ fontSize: "1rem", fontWeight: 300 }}
               >
                 {group?.title}
               </Typography>
@@ -166,11 +166,11 @@ export const InfiniteMovingCards = ({
                 justifyContent={"center"}
               >
                 {group.items.map((item: any, idx: number) => (
-                  <div key={idx}>
+                  <Box key={idx}>
                     <Typography variant="h3" sx={{ fontSize: "2rem", mt: 3 }}>
                       {iconMap[item.icon]}
                     </Typography>
-                  </div>
+                  </Box>
                 ))}
               </Stack>
             </Box>

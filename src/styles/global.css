@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../../public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('woff2-variations');
-  font-weight: 100 200 300 400 500 600 700 800 900 1000;
- }
 body {
   font-family: "Montserrat";
   font-weight: 300;
